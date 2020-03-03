@@ -1,0 +1,24 @@
+---
+title: "sampling"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(googlesheets4)
+library(tidyverse)
+library(janitor)
+```
+
+```{r echo=FALSE}
+sheets_deauth()
+
+sample <- read_sheet("https://docs.google.com/spreadsheets/d/14HmwN2cEVAJHupuehCuLdwG9BXtR3COrxDgaaylLhkA/edit#gid=0") %>%
+  clean_names() %>%
+  arrange(desc(red))
+
+sample %>%
+  ggplot(aes(red)) + geom_bar()
+
+# ss is the google sheet identifier
+```
